@@ -16,15 +16,7 @@ function backgrounding () {
 	backgroundType = event.target.innerText.toUpperCase();
 	backgroundPath = './backgrounds/' + backgroundType + '.png';
 	
-	loadImage(backgroundPath);
-}
-
-function loadImage(filePath) {
-	console.log("Loading");
-	var preload = new createjs.LoadQueue();
-	preload.addEventListener("fileload", redraw);
-	preload.loadFile(filePath);
-	console.log("Loading ....");
+	redraw();
 }
 
 function redraw() {
@@ -34,11 +26,13 @@ function redraw() {
 	ctx.font = '48px Verdana';
 	
 	if (backgroundType) {
-		var myImage = new Image(750, 1050);
-		myImage.src = './backgrounds/' + backgroundType + '.png';
-		console.log(myImage);
+		var bg_ToDraw = new Image(750, 1050);
+		bg_ToDraw.src = './backgrounds/' + backgroundType + '.png';
+		console.log(bg_ToDraw);
 	
-		ctx.drawImage(myImage,0,0);
+		bg_ToDraw.addEventListener("load", function () {
+			ctx.drawImage(bg_ToDraw,0,0);
+		});
 	}
 	
 	console.log("Redrawed !");
