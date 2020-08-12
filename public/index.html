@@ -7,24 +7,43 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	
+	<!-- Preload JS -->
+	<script src="https://code.createjs.com/1.0.0/preloadjs.min.js"></script>
+	
+	<!-- CSS -->
 	<link rel="stylesheet" href="index.css" type="text/css">
 </head>
 <body>
 	<script type="text/javascript" src="./index.js"></script>
-	<div id="main-content">
+	<div class="container-fluid" id="main-content" >
 		<h1 id="big-title"> Hello World ! </h1>
 		<p>
 			This is a card creator for the game Uncontained
 		</p>
 		
 		<div id="canvas">
-			<canvas id="myCanvas" width="500" height="500">
-			
+			<canvas id="myCanvas" width="750" height="1050">
+				Your browser does not support the HTML5 canvas tag.
 			</canvas>
 		</div>
-		<button onclick="alerting()">
-			<span> Click me ! </span>
-		</button>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBackgroundButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Background
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownBackgroundButton">
+				<span class="dropdown-item" onclick="backgrounding(event)">Safe</span>
+				<span class="dropdown-item" onclick="backgrounding(event)">Euclid</span>
+				<span class="dropdown-item" onclick="backgrounding(event)">Keter</span>
+				<span class="dropdown-item" onclick="backgrounding(event)">Character</span>
+				<span class="dropdown-item" onclick="backgrounding(event)">Scenario</span>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

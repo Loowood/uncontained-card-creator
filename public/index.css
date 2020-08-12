@@ -20,3 +20,7 @@ h1, p {
 canvas {
 	border: 1px solid black;
 }
+
+.dropdown-item {
+	cursor: pointer;
+}
