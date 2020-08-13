@@ -6,3 +6,9 @@ It is merely being started and will probably be written in html5, css, and js
 
 ## What else do I need to know
 Nothing.
+
+## For collaborators
+Get yourself ruby.
+Do `gem install sinatra`
+Launch the server with `ruby server.rb`
+That's it.
