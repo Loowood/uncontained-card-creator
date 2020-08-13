@@ -9,6 +9,9 @@ Nothing.
 
 ## For collaborators
 Get yourself ruby.
-Do `gem install sinatra`
+
+Install sinatra with `gem install sinatra`
+
 Launch the server with `ruby server.rb`
+
 That's it.
