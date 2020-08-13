@@ -21,28 +21,39 @@
 </head>
 <body>
 	<script type="text/javascript" src="./index.js"></script>
-	<div class="container-fluid" id="main-content" >
+	<div id="main-content" >
 		<h1 id="big-title"> Hello World ! </h1>
 		<p>
 			This is a card creator for the game Uncontained
 		</p>
+		<div id="work-zone">
 		
-		<div id="canvas">
-			<canvas id="myCanvas" width="750" height="1050">
-				Your browser does not support the HTML5 canvas tag.
-			</canvas>
-		</div>
-		<div class="dropdown">
-			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBackgroundButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Background
-			</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownBackgroundButton">
-				<span class="dropdown-item" onclick="backgrounding(event)">Safe</span>
-				<span class="dropdown-item" onclick="backgrounding(event)">Euclid</span>
-				<span class="dropdown-item" onclick="backgrounding(event)">Keter</span>
-				<span class="dropdown-item" onclick="backgrounding(event)">Character</span>
-				<span class="dropdown-item" onclick="backgrounding(event)">Scenario</span>
+			<div id="canvas">
+				<canvas id="myCanvas" width="750" height="1050">
+					Your browser does not support the HTML5 canvas tag.
+				</canvas>
 			</div>
+			<div id="buttons">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBackgroundButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Background
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownBackgroundButton">
+						<span class="dropdown-item" onclick="backgrounding(event)">Safe</span>
+						<span class="dropdown-item" onclick="backgrounding(event)">Euclid</span>
+						<span class="dropdown-item" onclick="backgrounding(event)">Keter</span>
+						<span class="dropdown-item" onclick="backgrounding(event)">Character</span>
+						<span class="dropdown-item" onclick="backgrounding(event)">Scenario</span>
+					</div>
+				</div>
+				<div class="form-group mt-5">
+					<label for="cardNameField">Card Name</label>
+					<input type="email" class="form-control" id="cardNameField" aria-describedby="cardNameHelp" onchange="nameCardChange()" />
+					<small id="cardNameHelp" class="form-text text-muted">How would you like to call your card ?</small>
+				</div>
+			</div>
+			
+			
 		</div>
 	</div>
 </body>

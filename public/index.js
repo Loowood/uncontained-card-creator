@@ -12,15 +12,20 @@ function clearing() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+function nameCardChange() {
+	cardName = event.target.value;
+	
+	redraw();
+}
+
 function backgrounding () {
 	backgroundType = event.target.innerText.toUpperCase();
-	backgroundPath = './backgrounds/' + backgroundType + '.png';
+	// backgroundPath = './backgrounds/' + backgroundType + '.png';
 	
 	redraw();
 }
 
 function redraw() {
-	console.log("Loaded ! Redrawing ...");
 	clearing();
 	ctx.fillStyle = 'black';
 	ctx.font = '48px Verdana';
@@ -31,9 +36,19 @@ function redraw() {
 		console.log(bg_ToDraw);
 	
 		bg_ToDraw.addEventListener("load", function () {
+			console.log("Loaded !");
 			ctx.drawImage(bg_ToDraw,0,0);
+			drawText();
 		});
+	} else {
+		drawText();
 	}
-	
-	console.log("Redrawed !");
+}
+
+function drawText() {
+	if (cardName) {
+		ctx.font = "48px ITC Bauhaus";
+		ctx.textAlign = "center";
+		ctx.fillText(cardName, 750/2, 70);
+	}
 }
