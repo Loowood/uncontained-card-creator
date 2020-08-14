@@ -50,6 +50,12 @@ function firstTagChange() {
 	redraw();
 }
 
+function conceptChange() {
+	conceptName = event.target.value;
+
+	redraw();
+}
+
 // This is the handler for when the user changes the type of background
 function backgrounding () {
 	backgroundType = event.target.innerText.toUpperCase();
@@ -121,4 +127,10 @@ function drawText() {
 		ctx.textAlign = "center";
 		ctx.fillText(cardName, 525, 645);
 	}
+	if (conceptName){
+		ctx.fillStyle = 'gray';
+		ctx.font = "italic 25px Verdana";
+		ctx.textAlign = "center";
+		ctx.fillText(conceptName,  550, 1030);
+		}
 }

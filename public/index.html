@@ -22,7 +22,7 @@
 <body>
 	<script type="text/javascript" src="./index.js"></script>
 	<div id="main-content" >
-		<h1 id="big-title"> Hello World ! </h1>
+		<h1 id="big-title"> Uncontained Card Creator </h1>
 		<p>
 			This is a card creator for the game Uncontained
 		</p>
@@ -97,6 +97,12 @@
 						<span class="dropdown-item" onclick="firstTagChange(event)">Disaster</span>
 						<span class="dropdown-item" onclick="firstTagChange(event)">Operation</span>
 					</div>
+				</div>
+				<!-- Concept By... -->
+				<div class="form-group mt-3">
+					<label for="cardConceptField">Concept Name</label>
+					<input type="email" class="form-control" id="cardConceptField" aria-describedby="conceptNameHelp" onchange="conceptChange()" />
+					<small id="cardNameHelp" class="form-text text-muted">Are you sure you made this?</small>
 				</div>
 				
 				<!-- <h2> First effect </h2>
