@@ -71,9 +71,9 @@ function effectParse (valueUnparsed) {
 	let converter = new showdown.Converter();
     let text      = valueUnparsed.replace(' ', '&nbsp;');
 	console.log(text);
-    let html      = converter.makeHtml(text.replaceAll(' ', '&nbsp;'));
+    let html      = converter.makeHtml(text.replaceAll(' ', '&ensp;'));
 	html      = html.replace(regexImg, '<img src="./icons/$1.png"></img>');
-	html      = html.replace("<p>", '<p style="font-size: 30px;">');
+	html      = html.replace("<p>", '<p style="font-size: 30px; font-family: \'Verdana\';">');
 	document.getElementById('rendered-zone').innerHTML = html;
 	
 	redraw();
@@ -157,7 +157,7 @@ function redraw() {
 	}
 	if (firstEffectUnparsed) {
 		console.log(document.getElementById('rendered-zone'));
-		render_html_to_canvas(document.getElementById('rendered-zone').innerHTML, ctx, 100, 700, 600, 400);
+		render_html_to_canvas(document.getElementById('rendered-zone').innerHTML, ctx, 120, 650, 600, 400);
 	}
 	drawText();
 }

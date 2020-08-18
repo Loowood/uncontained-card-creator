@@ -43,3 +43,7 @@ textarea {
 .dropdown-item {
 	cursor: pointer;
 }
+
+#rendered-zone p {
+	word-break: break-word;
+}
