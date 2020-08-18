@@ -28,7 +28,7 @@
 	width: 40%;
 }
 
-h1, p {
+h1{
 	display: flex;
 }
 

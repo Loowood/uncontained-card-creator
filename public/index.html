@@ -13,11 +13,14 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	
-	<!-- Preload JS -->
-	<script src="https://code.createjs.com/1.0.0/preloadjs.min.js"></script>
-	
 	<!-- CSS -->
 	<link rel="stylesheet" href="index.css" type="text/css">
+	
+	<!-- hmlt2canvas -->
+	<script src="./misc/html2canvas.min.js"></script>
+	
+	<!-- showdown -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 </head>
 <body>
 	<script type="text/javascript" src="./index.js"></script>
@@ -51,7 +54,7 @@
 				<!-- Title / Flavor -->
 				<div class="form-group mt-3">
 					<label for="cardFlavorField">Card Flavor</label>
-					<input type="email" class="form-control" id="cardFlavorField" aria-describedby="cardFlavorHelp" onchange="flavorChange()" />
+					<input type="text" class="form-control" id="cardFlavorField" aria-describedby="cardFlavorHelp" onkeyup="flavorChange()" />
 					<small id="cardFlavorHelp" class="form-text text-muted">What's the title of your card ?</small>
 				</div>
 				<!-- Class -->
@@ -70,7 +73,7 @@
 				<!-- Name -->
 				<div class="form-group mt-3">
 					<label for="cardNameField">Card Name</label>
-					<input type="email" class="form-control" id="cardNameField" aria-describedby="cardNameHelp" onchange="nameChange()" />
+					<input type="text" class="form-control" id="cardNameField" aria-describedby="cardNameHelp" onkeyup="nameChange()" />
 					<small id="cardNameHelp" class="form-text text-muted">So, what is it ?</small>
 				</div>
 				<!-- First Tag -->
@@ -101,26 +104,29 @@
 				<!-- Concept By... -->
 				<div class="form-group mt-3">
 					<label for="cardConceptField">Concept Name</label>
-					<input type="email" class="form-control" id="cardConceptField" aria-describedby="conceptNameHelp" onchange="conceptChange()" />
+					<input type="text" class="form-control" id="cardConceptField" aria-describedby="conceptNameHelp" onkeyup="conceptChange()" value="Concept by "/>
 					<small id="conceptNameHelp" class="form-text text-muted">Are you sure you made this?</small>
 				</div>
 				
-				<!-- <h2> First effect </h2>
-				<div class="form-row">
-					<div class="input-group-prepend">
-						<select class="form-control">
-							<option>START</option>
-							<option>END</option>
-							<option>ACTIVE</option>
-							<option>INSTANT</option>
-						</select>
+				<h2> First effect </h2>
+				<div>
+					<div class="form-row">
+						<div class="input-group-prepend">
+							<select class="form-control">
+								<option>START</option>
+								<option>END</option>
+								<option>ACTIVE</option>
+								<option>INSTANT</option>
+							</select>
+						</div>
+						<div>
+							<input type="text" class="form-control" onkeyup="firstEffectChange()" />
+						</div>
 					</div>
-					<div>
-						<textarea>
-							
-						</textarea>
+					<div id="rendered-zone">
+						
 					</div>
-				</div> -->
+				</div>
 				
 			</div>
 			

@@ -9,6 +9,8 @@ var cardClassImg = false; // If the class if ANOMALY/CHARACTER, then this become
 var cardName; // The Name of the Card, for instance "SCP-343"
 var cardFlavor; // The Title of the Card, for instance "God"
 var firstTag; // The name of the image file for the first tag
+var conceptName; // The name of the original author of the SCP this card is based on
+var firstEffectUnparsed; // The first effect text, unparsed by markdown
 
 window.onload =  function () { // Waiting for the page to load before getting the canvas context
 	canvas = document.getElementById('myCanvas');
@@ -28,6 +30,7 @@ function nameChange() {
 
 // This is the handler for when the user changes the card title
 function flavorChange() {
+	console.log('flavorChange');
 	cardFlavor = event.target.value;
 	
 	redraw();
@@ -56,12 +59,62 @@ function conceptChange() {
 	redraw();
 }
 
+// This is the handler for when the user changes the first effect text
+function firstEffectChange() {
+	firstEffectUnparsed = event.target.value;
+	effectParse(firstEffectUnparsed);
+}
+
+// Parsing the effect text
+function effectParse (valueUnparsed) {
+	let regexImg = /\[img\:(\w+)\]/;
+	let converter = new showdown.Converter();
+    let text      = valueUnparsed.replace(' ', '&nbsp;');
+	console.log(text);
+    let html      = converter.makeHtml(text.replaceAll(' ', '&nbsp;'));
+	html      = html.replace(regexImg, '<img src="./icons/$1.png"></img>');
+	html      = html.replace("<p>", '<p style="font-size: 30px;">');
+	document.getElementById('rendered-zone').innerHTML = html;
+	
+	redraw();
+}
+
 // This is the handler for when the user changes the type of background
 function backgrounding () {
 	backgroundType = event.target.innerText.toUpperCase();
 	// backgroundPath = './backgrounds/' + backgroundType + '.png';
 	
 	redraw();
+}
+
+// To render html onto a canvas
+function render_html_to_canvas(html, ctx, x, y, width, height) {
+  var data = "data:image/svg+xml;charset=utf-8," + '<svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '">' +
+    '<foreignObject width="100%" height="100%">' +
+    html_to_xml(html) +
+    '</foreignObject>' +
+    '</svg>';
+
+  var img = new Image();
+  img.onload = function() {
+    ctx.drawImage(img, x, y);
+	console.log("Hmtl rendered, img loaded !");
+  }
+  img.src = data;
+}
+
+function html_to_xml(html) {
+  var doc = document.implementation.createHTMLDocument('');
+  doc.write(html);
+
+  // You must manually set the xmlns if you intend to immediately serialize     
+  // the HTML document to a string as opposed to appending it to a
+  // <foreignObject> in the DOM
+  doc.documentElement.setAttribute('xmlns', doc.documentElement.namespaceURI);
+
+  // Get well-formed markup
+  html = (new XMLSerializer).serializeToString(doc.body);
+  return html;
 }
 
 // This function is mainly for drawing images on the canvas
@@ -102,7 +155,10 @@ function redraw() {
 			drawText();
 		});
 	}
-	
+	if (firstEffectUnparsed) {
+		console.log(document.getElementById('rendered-zone'));
+		render_html_to_canvas(document.getElementById('rendered-zone').innerHTML, ctx, 100, 700, 600, 400);
+	}
 	drawText();
 }
 
@@ -132,5 +188,5 @@ function drawText() {
 		ctx.font = "italic 25px Verdana";
 		ctx.textAlign = "center";
 		ctx.fillText(conceptName,  550, 1030);
-		}
+	}
 }
