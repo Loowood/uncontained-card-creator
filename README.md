@@ -21,6 +21,7 @@ Launch the server with `ruby server.rb`
 
 That's it.
 
+## License
 This work is a derivative from [Uncontained][uncontained] created by [Kenomic Games][kenomic].
 
 This work is licensed under a
