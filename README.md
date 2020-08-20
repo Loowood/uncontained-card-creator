@@ -1,6 +1,6 @@
 # Uncontained Card Creator
 
-Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
 ## What is this ?
 This is a card creator for the board game Uncontained created by Kenomic Games.
