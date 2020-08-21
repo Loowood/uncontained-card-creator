@@ -7,18 +7,18 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-	
+
 	<!-- Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-	
+
 	<!-- CSS -->
 	<link rel="stylesheet" href="index.css" type="text/css">
-	
+
 	<!-- hmlt2canvas -->
 	<script src="./misc/html2canvas.min.js"></script>
-	
+
 	<!-- showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 </head>
@@ -30,45 +30,83 @@
 			This is a card creator for the game Uncontained
 		</p>
 		<div id="work-zone"> <!-- This is the zone containing the canvas on the left and the different buttons on the right -->
-		
+
 			<div id="canvas">
 				<canvas id="myCanvas" width="750" height="1050">
 					Your browser does not support the HTML5 canvas tag.
 				</canvas>
 			</div>
 			<div id="buttons"> <!-- This is the div containing every buttons, it's just inputs all way down -->
-				<!-- Background + Obj Class -->
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBackgroundButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Background
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownBackgroundButton">
-						<span class="dropdown-item" onclick="backgrounding(event)">Safe</span>
-						<span class="dropdown-item" onclick="backgrounding(event)">Euclid</span>
-						<span class="dropdown-item" onclick="backgrounding(event)">Keter</span>
-						<span class="dropdown-item" onclick="backgrounding(event)">Thaumiel</span>
-						<span class="dropdown-item" onclick="backgrounding(event)">Character</span>
-						<span class="dropdown-item" onclick="backgrounding(event)">Scenario</span>
-					</div>
-				</div>
+
+				<!-- Background + Class + First Tag -->
+                <div class="form-row">
+                    <!-- Background + Obj Class -->
+                    <div class="dropdown">
+    					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBackgroundButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    						Background
+    					</button>
+    					<div class="dropdown-menu" aria-labelledby="dropdownBackgroundButton">
+    						<span class="dropdown-item" onclick="backgrounding(event)">Safe</span>
+    						<span class="dropdown-item" onclick="backgrounding(event)">Euclid</span>
+    						<span class="dropdown-item" onclick="backgrounding(event)">Keter</span>
+    						<span class="dropdown-item" onclick="backgrounding(event)">Thaumiel</span>
+    						<span class="dropdown-item" onclick="backgrounding(event)">Character</span>
+    						<span class="dropdown-item" onclick="backgrounding(event)">Scenario</span>
+    					</div>
+    				</div>
+
+                    <!-- Class -->
+    				<div class="dropdown">
+    					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownClassButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    						Class
+    					</button>
+    					<div class="dropdown-menu" aria-labelledby="dropdownClassButton">
+    						<span class="dropdown-item" onclick="classChange(event)">CIVILIAN</span>
+    						<span class="dropdown-item" onclick="classChange(event)">CHARACTER</span>
+    						<span class="dropdown-item" onclick="classChange(event)">ANOMALY</span>
+    						<span class="dropdown-item" onclick="classChange(event)">SCENARIO</span>
+    						<span class="dropdown-item" onclick="classChange(event)">ANOMALY/CHARACTER</span>
+    					</div>
+    				</div>
+
+                    <!-- First Tag -->
+    				<div class="dropdown mb-3">
+    					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownClassButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    						First Tag
+    					</button>
+    					<div class="dropdown-menu" aria-labelledby="dropdownClassButton">
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Group</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Injured</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Foundation</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">GOC</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">MC&D</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Creature</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Humanoid</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Entity</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Location</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Event</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Object</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Digital</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Cognitive</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Infohazard</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Different</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Disaster</span>
+    						<span class="dropdown-item" onclick="firstTagChange(event)">Operation</span>
+                            <span class="dropdown-item" onclick="firstTagChange(event)">Broken</span>
+                            <span class="dropdown-item" onclick="firstTagChange(event)">Chaos</span>
+                            <span class="dropdown-item" onclick="firstTagChange(event)">Sarkic</span>
+                            <span class="dropdown-item" onclick="firstTagChange(event)">Serpent</span>
+                            <span class="dropdown-item" onclick="firstTagChange(event)">Contagion</span>
+    					</div>
+    				</div>
+                </div>
+
+
 				<!-- Title / Flavor -->
 				<div class="form-group mt-3">
 					<label for="cardFlavorField">Card Flavor</label>
 					<input type="text" class="form-control" id="cardFlavorField" aria-describedby="cardFlavorHelp" onkeyup="flavorChange()" />
 					<small id="cardFlavorHelp" class="form-text text-muted">What's the title of your card ?</small>
-				</div>
-				<!-- Class -->
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownClassButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Class
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownClassButton">
-						<span class="dropdown-item" onclick="classChange(event)">CIVILIAN</span>
-						<span class="dropdown-item" onclick="classChange(event)">CHARACTER</span>
-						<span class="dropdown-item" onclick="classChange(event)">ANOMALY</span>
-						<span class="dropdown-item" onclick="classChange(event)">SCENARIO</span>
-						<span class="dropdown-item" onclick="classChange(event)">ANOMALY/CHARACTER</span>
-					</div>
 				</div>
 				<!-- Name -->
 				<div class="form-group mt-3">
@@ -76,61 +114,143 @@
 					<input type="text" class="form-control" id="cardNameField" aria-describedby="cardNameHelp" onkeyup="nameChange()" />
 					<small id="cardNameHelp" class="form-text text-muted">So, what is it ?</small>
 				</div>
-				<!-- First Tag -->
-				<div class="dropdown mb-3">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownClassButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						First Tag
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownClassButton">
-						<span class="dropdown-item" onclick="firstTagChange(event)">Group</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Injured</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Foundation</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">GOC</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">MC&D</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Creature</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Humanoid</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Entity</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Location</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Event</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Object</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Digital</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Cognitive</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Infohazard</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Different</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Disaster</span>
-						<span class="dropdown-item" onclick="firstTagChange(event)">Operation</span>
-					</div>
-				</div>
 				<!-- Concept By... -->
 				<div class="form-group mt-3">
 					<label for="cardConceptField">Concept Name</label>
 					<input type="text" class="form-control" id="cardConceptField" aria-describedby="conceptNameHelp" onkeyup="conceptChange()" value="Concept by "/>
 					<small id="conceptNameHelp" class="form-text text-muted">Are you sure you made this?</small>
 				</div>
-				
+
+                <!-- First effect -->
 				<h2> First effect </h2>
 				<div>
-					<div class="form-row">
-						<div class="input-group-prepend">
-							<select class="form-control">
-								<option>START</option>
-								<option>END</option>
-								<option>ACTIVE</option>
-								<option>INSTANT</option>
-							</select>
-						</div>
+					<div class="form-group">
+                        <div class="input-group">
+                            <label class="input-group-text" for="selectIcon1">Icon</label>
+    						<select id="selectIcon1" class="custom-select" onchange="firstEffectIconChange()">
+                                <option></option>
+    							<option>START</option>
+    							<option>END</option>
+    							<option>ACTIVE</option>
+    							<option>INSTANT</option>
+                                <option>BREACH</option>
+                                <option>PLAY</option>
+    						</select>
+                        </div>
+                        <!-- Icon positions -->
+                        <div class="form-row mt-2 ml-2">
+                            <div class="form-row mr-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">X</span>
+                                </div>
+                                <div>
+                                    <input type="number" class="form-control" id="iconX1" name="X1" onchange="iconPositionChange()" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Y</span>
+                                </div>
+                                <div>
+                                    <input type="number" class="form-control" id="iconY1" name="Y1" onchange="iconPositionChange()" />
+                                </div>
+                            </div>
+                        </div>
+                        <h4> Text </h4>
 						<div>
-							<input type="text" class="form-control" onkeyup="firstEffectChange()" />
+							<input type="text" class="form-control" name="1" onkeyup="effectChange()" />
 						</div>
+                        <!-- Text positions -->
+                        <div class="form-row mt-2 ml-2">
+                            <div class="form-row mr-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">X</span>
+                                </div>
+                                <div>
+                                    <input type="number" class="form-control" id="textX1" name="X1" onchange="textPositionChange()" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Y</span>
+                                </div>
+                                <div>
+                                    <input type="number" class="form-control" id="textY1" name="Y1" onchange="textPositionChange()" />
+                                </div>
+                            </div>
+                        </div>
 					</div>
-					<div id="rendered-zone">
-						<p>text heretext heretext heretext heretext heretext heretext heretext heretext heretext heretext heretext heretext heretext heretext heretext heretext heretext here</p>
+					<div class="rendered-zone" id="rendered-zone 1">
+
 					</div>
 				</div>
-				
+
+                <!-- Second effect -->
+                <h2> Second effect </h2>
+				<div>
+					<div class="form-group">
+                        <div class="input-group">
+                            <label class="input-group-text" for="selectIcon1">Icon</label>
+    						<select id="selectIcon1" class="custom-select" onchange="secondEffectIconChange()">
+                                <option></option>
+    							<option>START</option>
+    							<option>END</option>
+    							<option>ACTIVE</option>
+    							<option>INSTANT</option>
+                                <option>BREACH</option>
+                                <option>PLAY</option>
+    						</select>
+                        </div>
+                        <!-- Icon positions -->
+                        <div class="form-row mt-2 ml-2">
+                            <div class="form-row mr-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">X</span>
+                                </div>
+                                <div>
+                                    <input type="number" class="form-control" id="iconX2" name="X2" onchange="iconPositionChange()" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Y</span>
+                                </div>
+                                <div>
+                                    <input type="number" class="form-control" id="iconY2" name="Y2" onchange="iconPositionChange()" />
+                                </div>
+                            </div>
+                        </div>
+                        <h4> Text </h4>
+						<div>
+							<input type="text" class="form-control" name="2" onkeyup="effectChange()" />
+						</div>
+                        <!-- Text positions -->
+                        <div class="form-row mt-2 ml-2">
+                            <div class="form-row mr-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">X</span>
+                                </div>
+                                <div>
+                                    <input type="number" class="form-control" id="textX2" name="X2" onchange="textPositionChange()" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Y</span>
+                                </div>
+                                <div>
+                                    <input type="number" class="form-control" id="textY2" name="Y2" onchange="textPositionChange()" />
+                                </div>
+                            </div>
+                        </div>
+					</div>
+					<div class="rendered-zone" id="rendered-zone 2">
+
+					</div>
+				</div>
 			</div>
-			
-			
+
+
 		</div>
 	</div>
 </body>

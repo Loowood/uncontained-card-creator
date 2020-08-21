@@ -11,62 +11,145 @@ var cardFlavor; // The Title of the Card, for instance "God"
 var firstTag; // The name of the image file for the first tag
 var conceptName; // The name of the original author of the SCP this card is based on
 var firstEffectUnparsed; // The first effect text, unparsed by markdown
+var secondEffectUnparsed;
+var firstEffectIcon; // The first effect icon
+var secondEffectIcon; // The second effect icon
+
+var iconX1 = 40;
+var iconY1 = 700;
+var iconX2 = 40;
+var iconY2 = 850;
+
+var textX1 = 130;
+var textY1 = 650;
+var textX2 = 130;
+var textY2 = 820;
 
 window.onload =  function () { // Waiting for the page to load before getting the canvas context
 	canvas = document.getElementById('myCanvas');
 	ctx = canvas.getContext('2d');
+	document.getElementById('iconX1').value = iconX1;
+	document.getElementById('iconY1').value = iconY1;
+	document.getElementById('iconX2').value = iconX2;
+	document.getElementById('iconY2').value = iconY2;
+
+	document.getElementById('textX1').value = textX1;
+	document.getElementById('textY1').value = textY1;
+	document.getElementById('textX2').value = textX2;
+	document.getElementById('textY2').value = textY2;
+
+	drawText();
 }
 
-function clearing() { // This is used to clear the whole canvas
+function clearing () { // This is used to clear the whole canvas
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 // This is the handler for when the user changes the card name
-function nameChange() {
+function nameChange  () {
 	cardName = event.target.value;
-	
+
 	redraw();
 }
 
 // This is the handler for when the user changes the card title
-function flavorChange() {
+function flavorChange () {
 	console.log('flavorChange');
 	cardFlavor = event.target.value;
-	
+
 	redraw();
 }
 
 // This is the handler for when the user changes the card class
-function classChange() {
+function classChange () {
 	cardClass = event.target.innerText.toUpperCase();
-	
+
 	cardClassImg = (cardClass == "ANOMALY/CHARACTER");
-	
+
 	redraw();
 }
 
 // This is the handler for when the user changes the card first tag
-function firstTagChange() {
+function firstTagChange () {
 	firstTag = event.target.innerText.toUpperCase();
 	// firstTagPath = './icons/' + firstTag + '.png';
-	
+
 	redraw();
 }
 
-function conceptChange() {
+function conceptChange () {
 	conceptName = event.target.value;
 
 	redraw();
 }
 
+function firstEffectIconChange () {
+	firstEffectIcon = event.target.value.toUpperCase();
+
+	redraw();
+}
+
+function secondEffectIconChange () {
+	secondEffectIcon = event.target.value.toUpperCase();
+
+	redraw();
+}
+
+// This is the handler for when the user wants to change the position of the effect icons
+function iconPositionChange () {
+	console.log("changing icon positions");
+	switch (event.target.name) {
+		case "X1":
+			iconX1 = event.target.value;
+			break;
+		case 'Y1':
+			iconY1 = event.target.value;
+			break;
+		case 'X2':
+			iconX2 = event.target.value;
+			break;
+		case 'Y2':
+			iconY2 = event.target.value;
+			break;
+	}
+
+	redraw();
+}
+
+// This is the handler for when the user wants to change the position of the effect icons
+function textPositionChange () {
+	console.log("changing text positions");
+	switch (event.target.name) {
+		case "X1":
+			textX1 = event.target.value;
+			break;
+		case 'Y1':
+			textY1 = event.target.value;
+			break;
+		case 'X2':
+			textX2 = event.target.value;
+			break;
+		case 'Y2':
+			textY2 = event.target.value;
+			break;
+	}
+
+	redraw();
+}
+
 // This is the handler for when the user changes the first effect text
-function firstEffectChange() {
-	firstEffectUnparsed = event.target.value;
-	effectParse(firstEffectUnparsed);
+function effectChange () {
+	if (event.target.name == "1") {
+		firstEffectUnparsed = event.target.value;
+		effectParse(firstEffectUnparsed, 1);
+	} else if (event.target.name == "2") {
+		secondEffectUnparsed = event.target.value;
+		effectParse(secondEffectUnparsed, 2);
+	}
 }
 
 // Parsing the effect text
-function effectParse (valueUnparsed) {
+function effectParse (valueUnparsed, nbZone) {
 	let regexImg = /\[img\:(\w+)\]/;
 	let converter = new showdown.Converter();
     let text      = valueUnparsed.replace(' ', '&nbsp;');
@@ -74,8 +157,9 @@ function effectParse (valueUnparsed) {
     let html      = converter.makeHtml(text.replaceAll(' ', '&ensp;'));
 	html      = html.replace(regexImg, '<img src="./icons/$1.png"></img>');
 	html      = html.replace("<p>", '<p style="font-size: 30px; font-family: \'Verdana\';">');
-	document.getElementById('rendered-zone').innerHTML = html;
-	
+	console.log('rendered-zone ' + nbZone);
+	document.getElementById('rendered-zone ' + nbZone).innerHTML = html;
+
 	redraw();
 }
 
@@ -83,7 +167,7 @@ function effectParse (valueUnparsed) {
 function backgrounding () {
 	backgroundType = event.target.innerText.toUpperCase();
 	// backgroundPath = './backgrounds/' + backgroundType + '.png';
-	
+
 	redraw();
 }
 
@@ -107,7 +191,7 @@ function html_to_xml(html) {
   var doc = document.implementation.createHTMLDocument('');
   doc.write(html);
 
-  // You must manually set the xmlns if you intend to immediately serialize     
+  // You must manually set the xmlns if you intend to immediately serialize
   // the HTML document to a string as opposed to appending it to a
   // <foreignObject> in the DOM
   doc.documentElement.setAttribute('xmlns', doc.documentElement.namespaceURI);
@@ -120,12 +204,12 @@ function html_to_xml(html) {
 // This function is mainly for drawing images on the canvas
 function redraw() {
 	clearing();
-	
+
 	if (backgroundType) { // If the background has been selected, then we draw it
 		var bg_ToDraw = new Image(750, 1050);
 		bg_ToDraw.src = './backgrounds/' + backgroundType + '.png';
 		console.log(bg_ToDraw);
-		
+
 		// This part is crucial. It waits for the image to load, and then draws it as a callback
 		bg_ToDraw.addEventListener("load", function () {
 			console.log("Loaded !");
@@ -137,7 +221,7 @@ function redraw() {
 		var class_ToDraw = new Image(436, 109);
 		class_ToDraw.src = './misc/AnomalyCharacterContainer.png';
 		console.log(class_ToDraw);
-		
+
 		class_ToDraw.addEventListener("load", function () {
 			console.log("Loaded !");
 			ctx.drawImage(class_ToDraw, 20, 103);
@@ -148,16 +232,42 @@ function redraw() {
 		var firstTag_ToDraw = new Image(70, 70);
 		firstTag_ToDraw.src = './icons/' + firstTag + '.png';
 		console.log(firstTag_ToDraw);
-		
+
 		firstTag_ToDraw.addEventListener("load", function() {
 			console.log("Tag Loaded!");
 			ctx.drawImage(firstTag_ToDraw, 640, 175);
 			drawText();
 		});
 	}
+	if(firstEffectIcon) {
+		var firstEffectIcon_ToDraw = new Image(70, 70);
+		firstEffectIcon_ToDraw.src = './icons/effects/' + firstEffectIcon + '.png';
+		console.log(firstEffectIcon_ToDraw);
+
+		firstEffectIcon_ToDraw.addEventListener("load", function() {
+			console.log("Effect Icon Loaded !");
+			ctx.drawImage(firstEffectIcon_ToDraw, iconX1, iconY1, 85, 85);
+			drawText();
+		})
+	}
+	if(secondEffectIcon) {
+		var secondEffectIcon_ToDraw = new Image(70, 70);
+		secondEffectIcon_ToDraw.src = './icons/effects/' + secondEffectIcon + '.png';
+		console.log(secondEffectIcon_ToDraw);
+
+		secondEffectIcon_ToDraw.addEventListener("load", function() {
+			console.log("Effect Icon Loaded !");
+			ctx.drawImage(secondEffectIcon_ToDraw, iconX2, iconY2, 85, 85);
+			drawText();
+		})
+	}
 	if (firstEffectUnparsed) {
-		console.log(document.getElementById('rendered-zone'));
-		render_html_to_canvas(document.getElementById('rendered-zone').innerHTML, ctx, 120, 650, 600, 400);
+		console.log(document.getElementById('rendered-zone 1'));
+		render_html_to_canvas(document.getElementById('rendered-zone 1').innerHTML, ctx, textX1, textY1, 600, 400);
+	}
+	if (secondEffectUnparsed) {
+		console.log(document.getElementById('rendered-zone 2'));
+		render_html_to_canvas(document.getElementById('rendered-zone 2').innerHTML, ctx, textX2, textY2, 600, 400);
 	}
 	drawText();
 }
@@ -188,5 +298,11 @@ function drawText() {
 		ctx.font = "italic 25px Verdana";
 		ctx.textAlign = "center";
 		ctx.fillText(conceptName,  550, 1030);
+	}
+	if (backgroundType != "SCENARIO") {
+		ctx.fillStyle = 'gray';
+		ctx.font = '25px Verdana';
+		ctx.textAlign = "left";
+		ctx.fillText("Kenomic Games", 20, 1030);
 	}
 }
