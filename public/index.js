@@ -14,16 +14,20 @@ var firstEffectUnparsed; // The first effect text, unparsed by markdown
 var secondEffectUnparsed;
 var firstEffectIcon; // The first effect icon
 var secondEffectIcon; // The second effect icon
+var quote; // The quote of the card
 
 var iconX1 = 40;
 var iconY1 = 700;
 var iconX2 = 40;
-var iconY2 = 850;
+var iconY2 = 820;
 
 var textX1 = 130;
 var textY1 = 650;
 var textX2 = 130;
-var textY2 = 820;
+var textY2 = 810;
+
+var quoteX = 25;
+var quoteY = 910;
 
 window.onload =  function () { // Waiting for the page to load before getting the canvas context
 	canvas = document.getElementById('myCanvas');
@@ -37,6 +41,9 @@ window.onload =  function () { // Waiting for the page to load before getting th
 	document.getElementById('textY1').value = textY1;
 	document.getElementById('textX2').value = textX2;
 	document.getElementById('textY2').value = textY2;
+
+	document.getElementById('quoteX').value = quoteX;
+	document.getElementById('quoteY').value = quoteY;
 
 	drawText();
 }
@@ -97,7 +104,6 @@ function secondEffectIconChange () {
 
 // This is the handler for when the user wants to change the position of the effect icons
 function iconPositionChange () {
-	console.log("changing icon positions");
 	switch (event.target.name) {
 		case "X1":
 			iconX1 = event.target.value;
@@ -116,9 +122,8 @@ function iconPositionChange () {
 	redraw();
 }
 
-// This is the handler for when the user wants to change the position of the effect icons
+// This is the handler for when the user wants to change the position of the effect texts
 function textPositionChange () {
-	console.log("changing text positions");
 	switch (event.target.name) {
 		case "X1":
 			textX1 = event.target.value;
@@ -137,26 +142,51 @@ function textPositionChange () {
 	redraw();
 }
 
+// This is the handler for when the user wants to change the position of the card quote
+function quotePositionChange () {
+	switch (event.target.name) {
+		case "X":
+			quoteX = event.target.value;
+			break;
+		case 'Y':
+			quoteY = event.target.value;
+			break;
+	}
+
+	redraw();
+}
+
 // This is the handler for when the user changes the first effect text
 function effectChange () {
 	if (event.target.name == "1") {
 		firstEffectUnparsed = event.target.value;
-		effectParse(firstEffectUnparsed, 1);
+		effectParse(firstEffectUnparsed, 1, false);
 	} else if (event.target.name == "2") {
 		secondEffectUnparsed = event.target.value;
-		effectParse(secondEffectUnparsed, 2);
+		effectParse(secondEffectUnparsed, 2, false);
 	}
 }
 
+// This is the handler for whent the user changes the card quote
+function quoteChange () {
+	quote = event.target.value;
+
+	effectParse(quote, 3, true);
+}
+
 // Parsing the effect text
-function effectParse (valueUnparsed, nbZone) {
+function effectParse (valueUnparsed, nbZone, isQuote) {
 	let regexImg = /\[img\:(\w+)\]/;
 	let converter = new showdown.Converter();
     let text      = valueUnparsed.replace(' ', '&nbsp;');
 	console.log(text);
     let html      = converter.makeHtml(text.replaceAll(' ', '&ensp;'));
 	html      = html.replace(regexImg, '<img src="./icons/$1.png"></img>');
-	html      = html.replace("<p>", '<p style="font-size: 30px; font-family: \'Verdana\';">');
+	if (isQuote) {
+		html      = html.replace("<p>", '<p style="font-size: 22px; font-family: \'Verdana\'; color: gray">');
+	} else {
+		html      = html.replace("<p>", '<p style="font-size: 30px; font-family: \'Verdana\';">');
+	}
 	console.log('rendered-zone ' + nbZone);
 	document.getElementById('rendered-zone ' + nbZone).innerHTML = html;
 
@@ -268,6 +298,10 @@ function redraw() {
 	if (secondEffectUnparsed) {
 		console.log(document.getElementById('rendered-zone 2'));
 		render_html_to_canvas(document.getElementById('rendered-zone 2').innerHTML, ctx, textX2, textY2, 600, 400);
+	}
+	if (quote) {
+		console.log(document.getElementById('rendered-zone 3'));
+		render_html_to_canvas(document.getElementById('rendered-zone 3').innerHTML, ctx, quoteX, quoteY, 700, 400);
 	}
 	drawText();
 }

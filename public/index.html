@@ -41,7 +41,7 @@
 				<!-- Background + Class + First Tag -->
                 <div class="form-row">
                     <!-- Background + Obj Class -->
-                    <div class="dropdown">
+                    <div class="dropdown mr-5">
     					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBackgroundButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     						Background
     					</button>
@@ -56,7 +56,7 @@
     				</div>
 
                     <!-- Class -->
-    				<div class="dropdown">
+    				<div class="dropdown mr-5">
     					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownClassButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     						Class
     					</button>
@@ -103,19 +103,47 @@
 
 
 				<!-- Title / Flavor -->
-				<div class="form-group mt-3">
+				<div class="form-group mt-2">
 					<label for="cardFlavorField">Card Flavor</label>
 					<input type="text" class="form-control" id="cardFlavorField" aria-describedby="cardFlavorHelp" onkeyup="flavorChange()" />
 					<small id="cardFlavorHelp" class="form-text text-muted">What's the title of your card ?</small>
 				</div>
 				<!-- Name -->
-				<div class="form-group mt-3">
+				<div class="form-group mt-2">
 					<label for="cardNameField">Card Name</label>
 					<input type="text" class="form-control" id="cardNameField" aria-describedby="cardNameHelp" onkeyup="nameChange()" />
-					<small id="cardNameHelp" class="form-text text-muted">So, what is it ?</small>
+					<small id="cardNameHelp" class="form-text text-muted">So, what SCP number is it ?</small>
 				</div>
+                <!-- Quote Text -->
+				<div class="form-group mt-2">
+					<label for="quoteField">Quote Text</label>
+					<input type="text" class="form-control" id="quoteField" aria-describedby="quoteHelp" onkeyup="quoteChange()" />
+					<small id="quoteHelp" class="form-text text-muted">Come on, tease us</small>
+				</div>
+                <!-- Quote positions -->
+                <div class="form-row ml-2">
+                    <div class="form-row mr-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">X</span>
+                        </div>
+                        <div>
+                            <input type="number" class="form-control" id="quoteX" name="X" onchange="quotePositionChange()" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Y</span>
+                        </div>
+                        <div>
+                            <input type="number" class="form-control" id="quoteY" name="Y" onchange="quotePositionChange()" />
+                        </div>
+                    </div>
+                </div>
+                <div class="rendered-zone" id="rendered-zone 3">
+
+                </div>
 				<!-- Concept By... -->
-				<div class="form-group mt-3">
+				<div class="form-group mt-2">
 					<label for="cardConceptField">Concept Name</label>
 					<input type="text" class="form-control" id="cardConceptField" aria-describedby="conceptNameHelp" onkeyup="conceptChange()" value="Concept by "/>
 					<small id="conceptNameHelp" class="form-text text-muted">Are you sure you made this?</small>
